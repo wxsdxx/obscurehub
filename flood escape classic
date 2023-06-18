@@ -150,7 +150,3 @@ items:AddButton({
          workspace.svcl_com.ShopExtra:FireServer(unpack(args))
   	end    
 })
-
-
-end
-OrionLib:Init() --close off library
