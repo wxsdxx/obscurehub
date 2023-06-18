@@ -1,0 +1,156 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "linkohub | Flood Escape Classic", HidePremium = false, IntroText = "linkohub", SaveConfig = true, ConfigFolder = "linkoConfig"})
+
+local localplr = Window:MakeTab({
+	Name = "localplayer",
+	Icon = "rbxassetid://7992557358",
+	PremiumOnly = false
+})
+
+local teleports = Window:MakeTab({
+	Name = "teleports",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local items = Window:MakeTab({
+	Name = "free items",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+localplr:AddSlider({ -- localplr tab
+	Name = "Walkspeed",
+	Min = 14,
+	Max = 32,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+localplr:AddSlider({
+	Name = "JumpPower",
+	Min = 50,
+	Max = 80,
+	Default = 50,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Power",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+
+local Section = teleports:AddSection({ -- teleports tab
+	Name = "Lift Teleports"
+})
+
+teleports:AddButton({
+	Name = "Easy",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-421.64386, 260.614105, 127.360802, -0.864180088, -5.72258045e-08, -0.50318259, 1.05736815e-08, 1, -1.31887248e-07, 0.50318259, -1.19294825e-07, -0.864180088)
+  	end    
+})
+
+teleports:AddButton({
+	Name = "Medium",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-392.930328, 260.619659, 125.995331, -0.999832571, 1.59204721e-08, -0.0182975102, 1.83865598e-08, 1, -1.34608996e-07, 0.0182975102, -1.34922885e-07, -0.999832571)
+  	end    
+})
+
+teleports:AddButton({
+	Name = "Hard",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-362.86441, 260.610931, 127.635689, -0.867312491, 1.26700357e-08, 0.497764051, 1.10059721e-08, 1, -6.27690699e-09, -0.497764051, 3.43374218e-11, -0.867312491)
+  	end    
+})
+
+local Section = teleports:AddSection({
+	Name = "End Teleports"
+})
+
+teleports:AddButton({
+	Name = "Easy",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-230.611328, 157.59996, 64.6321106, -0.0862551033, -8.86108396e-08, 0.9962731, -5.55807524e-08, 1, 8.41302636e-08, -0.9962731, -4.81169415e-08, -0.0862551033)
+  	end    
+})
+
+teleports:AddButton({
+	Name = "Medium",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-235.480118, 157.59996, 191.888733, -0.27990219, 2.52354759e-09, 0.960028529, 4.78580766e-08, 1, 1.13246976e-08, -0.960028529, 4.91149272e-08, -0.27990219)
+  	end    
+})
+
+teleports:AddButton({
+	Name = "Hard",
+	Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-233.130829, 157.59996, 321.721436, 0.683897078, -4.65786663e-08, 0.729578495, 3.52729792e-08, 1, 3.0778839e-08, -0.729578495, 4.6848494e-09, 0.683897078)
+  	end    
+})
+
+items:AddButton({ -- items tab
+	Name = "Flood Shard",
+	Callback = function()
+    local args = {
+      [1] = "FloodShard"
+    }
+
+    workspace.svcl_com.ShopExtra:FireServer(unpack(args))
+
+  	end    
+})
+
+items:AddButton({
+	Name = "Dash",
+	Callback = function()
+        local args = {
+            [1] = "Dash"
+     }
+
+         workspace.svcl_com.ShopExtra:FireServer(unpack(args))
+  	end    
+})
+
+items:AddButton({
+	Name = "Weak Gravity Coil",
+	Callback = function()
+        local args = {
+            [1] = "WeakGravCoil"
+     }
+
+         workspace.svcl_com.ShopExtra:FireServer(unpack(args))
+  	end    
+})
+
+items:AddButton({
+	Name = "Flood Sword",
+	Callback = function()
+        local args = {
+            [1] = "FloodSword"
+     }
+
+         workspace.svcl_com.ShopExtra:FireServer(unpack(args))
+  	end    
+})
+
+items:AddButton({
+	Name = "Trophy",
+	Callback = function()
+        local args = {
+            [1] = "Trophy"
+     }
+
+         workspace.svcl_com.ShopExtra:FireServer(unpack(args))
+  	end    
+})
+
+
+end
+OrionLib:Init() --close off library
