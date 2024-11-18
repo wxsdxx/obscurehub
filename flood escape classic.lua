@@ -2,6 +2,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local plr = game:GetService('Players').LocalPlayer
 local hum = plr.Character:FindFirstChildOfClass('Humanoid')
 local uis = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Noclipping = nil
 
 if game.PlaceId == 32990482 then
     local MainWindow = Rayfield:CreateWindow({
@@ -93,6 +95,14 @@ if game.PlaceId == 32990482 then
         end,
      })
 
+	 local Noclip = MainTab:CreateButton({
+      Name = "noclip (execute script)",
+      Callback = function()
+         loadstring(game:HttpGet('https://pastebin.com/raw/7SGz5hCc'))()
+      end,
+    })
+
+
      local ItemSection = MainTab:CreateSection("Free Items")
 
      local giveExtraItemInput = MainTab:CreateInput({
@@ -139,6 +149,8 @@ if game.PlaceId == 32990482 then
             workspace.svcl_com.ShopParticles:FireServer(unpack(args))
         end,
      })
+
+
 
      -- TELEPORTS TAB --
 
