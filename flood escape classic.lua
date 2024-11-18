@@ -55,7 +55,7 @@ local noclip = false
            Alright = { -- Duplicate this table or remove it to add and remove buttons to the notification.
               Name = "Okay!",
               Callback = function()
-                 --print("The user tapped Okay!"
+                 --print"The user tapped Okay!"
               end
            },
 
