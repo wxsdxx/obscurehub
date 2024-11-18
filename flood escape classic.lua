@@ -3,24 +3,23 @@ local plr = game:GetService('Players').LocalPlayer
 local hum = plr.Character:FindFirstChildOfClass('Humanoid')
 local uis = game:GetService("UserInputService")
 local RunService = game:GetService("RunService")
-local Noclipping = nil
+local InfiniteJumpEnabled = false
+local noclip = false
 
-if game.PlaceId == 32990482 then
-    local MainWindow = Rayfield:CreateWindow({
-        Name = "🌊 Flood Escape: Classic 🌊",
+ local MainWindow = Rayfield:CreateWindow({
+       Name = "🌊 Flood Escape: Classic 🌊",
         LoadingTitle = "Obscure Hub",
         LoadingSubtitle = "by xreadora",
-        Theme = "Serenity",
+        Theme = "Amethyst",
      
         DisableRayfieldPrompts = false,
         DisableBuildWarnings = false,
      
         ConfigurationSaving = {
-           Enabled = true,
+           Enabled = false,
            FolderName = nil,
            FileName = "obscurehub"
         },
-     
         Discord = {
            Enabled = false,
            Invite = "noinvitelink",
@@ -33,7 +32,7 @@ if game.PlaceId == 32990482 then
            Subtitle = "Key System",
            Note = "bit.ly/obscurekey",
            FileName = "obscurehubkey",
-           SaveKey = false, 
+           SaveKey = true, 
            GrabKeyFromSite = true,
            Key = {"https://pastebin.com/raw/NQwYFdur"}
         }
@@ -41,8 +40,10 @@ if game.PlaceId == 32990482 then
 
      local MainTab = MainWindow:CreateTab("🏠 Exploits", nil)
      local TeleportTab = MainWindow:CreateTab("🏃‍♀️ Teleports", nil)
+     local MiscTab = MainWindow:CreateTab("😋 Miscellaneous", nil)
      local MainMainSection = MainTab:CreateSection("Main")
      local LobbyTeleportSection = TeleportTab:CreateSection("Lobby")
+     local MainMiscSection = MiscTab:CreateSection("Miscellaneous")
 
      Rayfield:Notify({
         Title = "Script Executed",
@@ -51,10 +52,10 @@ if game.PlaceId == 32990482 then
         Image = nil,
         Actions = { -- Notification Buttons
      
-           Alright = { -- Duplicate this table (or remove it) to add and remove buttons to the notification.
+           Alright = { -- Duplicate this table or remove it to add and remove buttons to the notification.
               Name = "Okay!",
               Callback = function()
-                 --print("The user tapped Okay!")
+                 --print("The user tapped Okay!"
               end
            },
 
@@ -95,12 +96,44 @@ if game.PlaceId == 32990482 then
         end,
      })
 
-	 local Noclip = MainTab:CreateButton({
-      Name = "noclip (execute script)",
-      Callback = function()
-         loadstring(game:HttpGet('https://pastebin.com/raw/7SGz5hCc'))()
+    local infjump = MainTab:CreateToggle({
+      Name = "infinite jump",
+      CurrentValue = false,
+      Flag = "infjump", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+      Callback = function(Value)
+         if Value then
+            InfiniteJumpEnabled = true
+         else
+            InfiniteJumpEnabled = false
+         end
       end,
-    })
+   })
+
+   local noclip = MainTab:CreateButton({
+      Name = "noclip (PERMANENT)",
+      Callback = function()
+      noclip = true
+      end,
+   })
+
+
+   game:GetService("UserInputService").JumpRequest:connect(function()
+      if InfiniteJumpEnabled then
+            hum:ChangeState("Jumping")
+            wait()
+            hum:ChangeState("Sitting")
+      end
+   end)
+
+   RunService.Stepped:connect(function()
+      if noclip then
+         hum.Parent.Head.CanCollide = false
+         hum.Parent.Torso.CanCollide = false
+      elseif not noclip then
+         hum.Parent.Head.CanCollide = true
+         hum.Parent.Torso.CanCollide = true
+      end
+   end)
 
 
      local ItemSection = MainTab:CreateSection("Free Items")
@@ -197,22 +230,12 @@ if game.PlaceId == 32990482 then
             hum.Parent.HumanoidRootPart.CFrame = CFrame.new(-233.130829, 157.59996, 321.721436, 0.683897078, -4.65786663e-08, 0.729578495, 3.52729792e-08, 1, 3.0778839e-08, -0.729578495, 4.6848494e-09, 0.683897078)
         end,
      })
-else
-    Rayfield:Notify({
-        Title = "Wrong Game!",
-        Content = "You are in the wrong game, You are supposed to be in Flood Escape: Classic!",
-        Duration = 6.5,
-        Image = nil,
-        Actions = { -- Notification Buttons
-     
-           Alright = { -- Duplicate this table (or remove it) to add and remove buttons to the notification.
-              Name = "Okay!",
-              Callback = function()
-                 --print("The user tapped Okay!")
-              end
-           },
 
-     
-     },
+     -- MISC TAB --
+
+     local UnloadScript = MiscTab:CreateButton({
+      Name = "unload",
+      Callback = function()
+         Rayfield:Destroy()
+      end,
      })
-end
